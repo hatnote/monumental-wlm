@@ -1,0 +1,95 @@
+<md-toolbar class="toolbar"
+              layout="column" layout-align="start center"
+              ng-class="isHidden ? 'toolbar--hidden' : 'toolbar--shown'">
+	<div class="md-toolbar-tools" 
+        ng-class="{ 'md-toolbar-tools-wide': ('main.list' | includedByState) || ('main.map' | includedByState) }">
+    <div flex="30" hide-xs>
+      <md-button ui-sref="main.dashboard">Wiki Loves Monuments <span class="text-primary">Map</span></md-button>
+    </div>
+    <div flex="30" hide-gt-xs>
+      <md-button ui-sref="main.dashboard">WLM <span class="text-primary">Map</span></md-button>
+    </div>
+    <span flex></span>
+    <div class="text-right" flex="30" hide-xs>
+      <md-button class="text-normal" disabled
+                  ng-if="$ctrl.isLoggedIn.isLoading">
+        Loading...
+      </md-button>
+      <md-button class="text-normal"
+                  ng-if="!$ctrl.isLoggedIn.isLoading && $ctrl.isLoggedIn.name"
+                  ng-click="$ctrl.settings = !$ctrl.settings">
+        <md-icon>face</md-icon>
+        <span>{{ $ctrl.isLoggedIn.name }}</span>
+      </md-button>
+      <md-button class="text-normal"
+                  ng-if="!$ctrl.isLoggedIn.isLoading && !$ctrl.isLoggedIn.name"
+                  ng-click="$ctrl.login()">
+        <md-icon>security</md-icon>
+        <span>Log in</span>
+      </md-button>
+    </div>
+    <div class="text-right" flex="50" hide-gt-xs>
+      <!--
+      <md-button class="text-normal md-icon-button"
+                  ng-click="$ctrl.langSettings = !$ctrl.langSettings">
+        <md-icon>translate</md-icon>
+      </md-button>
+      -->
+      <md-button class="text-normal md-icon-button"
+                  ng-if="!$ctrl.isLoggedIn.isLoading && $ctrl.isLoggedIn.name"
+                  ng-click="$ctrl.settings = !$ctrl.settings">
+        <md-icon>face</md-icon>
+      </md-button>
+      <md-button class="text-normal md-icon-button"
+                  ng-if="!$ctrl.isLoggedIn.isLoading && !$ctrl.isLoggedIn.name"
+                  ng-click="$ctrl.login()">
+        <md-icon>security</md-icon>
+      </md-button>
+    </div>
+	</div>
+</md-toolbar>
+
+<div class="toolbar__settings md-whiteframe-16dp"
+      layout="row" layout-align="center center"
+      ng-if="$ctrl.settings">
+  <div class="toolbar__column" layout="row" layout-align="center center" flex>
+    <span flex></span>
+    <md-button class="text-normal"
+                ng-click="$ctrl.logout()">
+      <md-icon>exit_to_app</md-icon>
+      <span>Logout</span>
+    </md-button>
+  </div>
+</div>
+
+<div class="toolbar__settings md-whiteframe-16dp"
+      layout="row" layout-align="center center"
+      ng-if="$ctrl.langSettings">
+  <div class="toolbar__column" layout="row" layout-align="center center" flex>
+    <md-chips ng-model="$ctrl.languages" flex
+                md-max-chips="3"
+                md-require-match="true">
+      <md-chip-template>
+        <span>
+          <span>{{ $chip.nativeName }}</span>
+          <small>({{ $chip.code }})</small>
+        </span>
+      </md-chip-template>
+      <md-autocomplete
+          md-selected-item="$ctrl.lang.selectedItem.lang"
+          md-items="item in $ctrl.searchLang($ctrl.lang.searchText)"
+          md-search-text="$ctrl.lang.searchText"
+          md-item-text="item.name"
+          ng-hide="$ctrl.languages.length > 2">
+        <md-item-template>
+          <span md-highlight-text="$ctrl.lang.searchText">{{ item.nativeName }}</span>
+          <small>({{ item.code }})</small>
+        </md-item-template>
+      </md-autocomplete>
+    </md-chips>
+    <md-button class="md-primary" flex="20"
+                ng-click="$ctrl.saveUserLanguages()">
+      Save
+    </md-button>
+  </div>
+</div>

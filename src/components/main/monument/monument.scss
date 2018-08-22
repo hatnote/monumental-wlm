@@ -1,0 +1,388 @@
+@import '../../../styles/variables';
+@import '../../../styles/responsive';
+
+mo-monument {
+  .busy {
+    position: fixed;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background: rgba(255, 255, 255, .75);
+  }
+
+  .monument {
+    width: 980px;
+    max-width: 100%;
+  }
+
+  .monument__header {
+    padding: 25px;
+    background: white;
+    border-bottom: 1px solid $softGrey;
+
+    @include x-small { padding: 10px; }
+
+    .monument__primary {
+      margin-bottom: 20px;
+      border-bottom: 1px solid $softGrey;
+    }
+    .monument__secondary {
+      md-icon {
+        margin-right: 5px;
+        color: $lightGrey;
+      }
+      & > div {
+        margin-bottom: 15px;
+
+        & > div {
+          margin-bottom: 5px;
+        }
+      }
+    }
+  }
+
+  .monument__subheader {
+    padding: 15px 0;
+    background: #fafafa;
+    border-bottom: 1px solid $softGrey;
+  }
+
+  .monument__upload.monument__images {
+    margin-top: 10px;
+    position: relative;
+
+    .image {
+      max-height: 90px;
+      width: 120px;
+      margin-bottom: 10px;
+
+      canvas {
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+
+    h4 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    small {
+      font-size: 80%;
+      line-height: 1.5;
+    }
+  }
+
+  .upload__license {
+    border-top: 2px solid #990000;
+    font-size: 14px;
+  }
+
+  .monument__upload--loading {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1010;
+    padding-top: 20px;
+    font-weight: bold;
+    background: rgba(250, 250, 250, 0.5);
+  }
+
+  .monument__images {
+    width: 980px;
+    height: 90px;
+    overflow: hidden;
+    text-align: center;
+
+    @include x-small {
+      display: flex;
+      overflow: scroll;
+      margin-left: 15px;
+      margin-right: 15px;
+    }
+
+    .image {
+      display: inline-block;
+      margin-right: 5px;
+      padding: 5px;
+      background: white;
+      border: 1px solid $softGrey;
+    }
+  }
+
+  .monument__image {
+    width: 300px;
+    height: 300px;
+    padding: 0;
+    padding-right: 15px;
+    margin-right: 15px;
+    border-right: 3px solid $darkRed;
+
+    @include x-small {
+      width: calc(100vw - 30px); height: calc(100vw - 30px);
+      border-right: 0;
+    }
+  }
+
+  .monument__image-link {
+    background: $softGrey;
+    width: 100%;
+    height: 100%;
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    .material-icons {
+      font-size: 400%;
+      opacity: .75;
+      width: 65px;
+      height: 65px;
+    }
+  }
+
+  .monument__data {
+    @include x-small { 
+      padding-right: 10px;
+      padding-left: 10px;
+    }
+  }
+
+  .monument__panel {
+    margin: 15px 0;
+    padding: 30px;
+    background: white;
+    border: 1px solid $softGrey;
+    border-radius: 2px;
+
+    @include x-small { padding: 20px; }
+  }
+
+  .monument__title {
+    margin-top: 0;
+    margin-bottom: 0;
+
+    @include x-small {
+      margin-top: 10px;
+      line-height: 26px;
+      font-size: 25px;
+    }
+
+    .md-icon-button {
+      height: 30px;
+      min-height: 30px;
+      width: 30px;
+      margin: -4px 0 0 2px;
+      padding: 0;
+    }
+
+    md-input-container {
+      margin-bottom: 0;
+      margin-top: -5px;
+      padding: 0;
+
+      .md-input {
+        padding: 0;
+        padding-bottom: 5px;
+      }
+
+      .md-errors-spacer {
+        display: none;
+      }
+    }
+
+    .loading-line {
+      height: 30px;
+    }
+  }
+
+  .monument__subtitle {
+    margin-top: 0; 
+    margin-bottom: 15px;
+
+    @include x-small {
+      font-size: 20px;
+    }
+
+    .loading-line {
+      height: 24px;
+    }
+  }
+
+  .monument__place {
+    display: block;
+    margin-bottom: 30px !important;
+  }
+
+  .monument__article {
+    .article__header {
+      .md-button.md-primary {
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+
+    .article__text {
+      position:relative;
+      max-height: 320px;
+      overflow: hidden;
+
+      & > div {
+        font-family: 'Merriweather', serif;
+        font-size: 15px;
+        line-height: 1.8;
+
+        @include x-small { font-size: 13px; }
+      }
+
+      p:first-child {
+        margin-top: 0;
+      }
+
+      &.article__text--long {
+        max-height: none;
+      }
+
+      &.article__text--all {
+        min-height: 100px;
+        column-count: 2;
+
+        @include x-small { column-count: 1; }
+      }
+    }
+
+    .article__more {
+      margin-top: -14px;
+      z-index: 5;
+      box-shadow: inset rgb(255,255,255) 0 -45px 15px;
+    }
+
+    .md-icon-button {
+      margin-top: -18px;
+    }
+  }
+
+  .monument__details {
+    .monument__details-item {
+      & > .muted {
+        margin-bottom: 20px;
+      }
+
+      strong {
+        margin-right: 20px;
+      }
+    }
+
+    .monument__details-edit {
+      margin-bottom: 5px;
+    }
+
+    .monument__details-qualifier {
+      font-size: 90%;
+      margin-left: 10px;
+    }
+
+    .monument__details-value {
+      line-height: 1.8;
+
+      .property__edit {
+        &.property__edit--deleted {
+          md-input-container .md-input {
+            text-decoration: line-through;
+          }
+        }
+
+        .md-button {
+          min-width: 36px;
+          min-height: 36px;
+          margin: 0 10px 0 10px;
+
+          @include x-small { margin: 0 0 0 10px; }
+        }
+
+        md-autocomplete md-autocomplete-wrap {
+          margin-top: -20px;
+
+          md-progress-linear.md-inline {
+            bottom: 15px;
+            right: 0;
+            left: 0;
+          }
+
+          md-input-container {
+            // margin-bottom: 0;
+            // margin-top: 0;
+            padding: 0;
+
+            label {
+              display: none;
+            }
+            .md-input {
+              padding: 0;
+              padding-bottom: 0;
+            }
+
+            .md-errors-spacer {
+              display: none;
+            }
+          }
+        }
+
+        & > md-input-container,
+        & > md-select {
+          margin: 0;
+          padding: 0;
+        }
+      }
+    }
+  }
+
+  .monument__non-part-alert {
+    margin-top: 10px;
+    padding: 20px;
+    text-align: center;
+    border-left: 3px solid $darkRed;
+    background: rgba(153, 0, 0, .1);
+    line-height: 1.5;
+    
+    strong {
+      font-weight: 700;
+    }
+  }
+
+  .monument__credits {
+    padding: 0 20px 20px;
+    strong {
+      font-weight: 700;
+    }
+    font-size: 14px;
+    line-height: 1.5;
+    background: transparent;
+  }
+  
+  .angular-leaflet-map {
+    height: 600px;
+
+    @include x-small { height: 300px; }
+  }
+  
+  .image__uploaded {
+    background: #27ae60;
+    padding: 2px 5px;
+    color: white;
+    font-size: 75%;
+    border-radius: 4px;
+    margin-left: 5px;
+  }
+}
+
+mo-url a {
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
+  text-overflow: ellipsis;
+}

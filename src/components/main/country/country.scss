@@ -1,0 +1,10 @@
+@import '../../../styles/variables';
+@import '../../../styles/responsive';
+
+mo-country {
+  .country {
+    width: 980px;
+    max-width: 100%;
+    padding: 0 20px;
+  }
+}
