@@ -1,10 +1,11 @@
 module.exports = {
-  "parserOptions": {
-    "ecmaVersion": 6,
-    "sourceType": "module"
+  parserOptions: {
+    ecmaVersion: 2016,
+    sourceType: "module"
   },
-  "extends": ["airbnb", "angular"],
-  "rules": {
-    "no-param-reassign": [2, { "props": false }]
+  plugins: ["prettier"],
+  extends: ["airbnb", "prettier"],
+  rules: {
+    "no-param-reassign": [2, { props: false }]
   }
-}
+};

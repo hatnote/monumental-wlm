@@ -136,7 +136,7 @@ function controller($location, $q, $scope, $state, $stateParams, $timeout, $wind
   }
 
   function getHeritageFilter() {
-    const query = ["P1435", "P2186", "P1459", "P1460", "P1216", "P709", "P718"].map(id => `{ ?item p:${id} ?monument }`).join(' UNION ');
+    const query = ["P1435", "P2186", "P1459", "P1460", "P1216", "P709", "P718", "P5694"].map(id => `{ ?item p:${id} ?monument }`).join(' UNION ');
     return query;
   }
 
