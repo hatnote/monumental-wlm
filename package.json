@@ -1,6 +1,6 @@
 {
   "name": "wlm-map",
-  "version": "18.09.01",
+  "version": "19.09.01",
   "private": true,
   "description": "Wiki Loves Monuments Map app",
   "main": "src/index.js",
@@ -8,8 +8,8 @@
     "start-live": "webpack-dev-server --content-base src --progress --colors",
     "start": "webpack --watch --content-base src --progress --colors",
     "build": "webpack --content-base src --progress",
-    "build-dev": "set NODE_ENV=dev && webpack --content-base src --progress",
-    "prod": "set NODE_ENV=prod && webpack --content-base src --progress",
+    "build-dev": "NODE_ENV=dev webpack --content-base src --progress",
+    "prod": "NODE_ENV=prod webpack --content-base src --progress",
     "test": "echo OK"
   },
   "devDependencies": {
