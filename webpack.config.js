@@ -24,8 +24,8 @@ var config = {
       { from: "manifest_local.json", to: path.join("..", "manifest.json") },
       { from: "app-icons", to: "app-icons" }
     ]),
-    function() {
-      this.plugin("watch-run", function(watching, callback) {
+    function () {
+      this.plugin("watch-run", function (watching, callback) {
         console.log(
           "\n\n---- " +
             new Date()
@@ -105,7 +105,7 @@ if (ENV === "prod" || ENV === "dev") {
       compress: {
         warnings: false
       },
-      mangle: false
+      mangle: true
     })
   ];
 }
