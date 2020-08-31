@@ -1,6 +1,6 @@
 {
   "name": "wlm-map",
-  "version": "19.09.02",
+  "version": "20.08.01",
   "private": true,
   "description": "Wiki Loves Monuments Map app",
   "main": "src/index.js",
