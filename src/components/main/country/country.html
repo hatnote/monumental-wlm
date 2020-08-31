@@ -1,20 +1,30 @@
-<div class="container" layout="column" layout-align="space-between stretch" flex>
+<div
+  class="container"
+  layout="column"
+  layout-align="space-between stretch"
+  flex
+>
   <div layout="column" layout-align="start stretch" flex>
     <div class="country__header" layout="column" layout-align="center center">
-      <div class="country"
-            layout="row" layout-align="center start"
-            layout-xs="column" layout-align-xs="start stretch">
+      <div
+        class="country"
+        layout="row"
+        layout-align="center start"
+        layout-xs="column"
+        layout-align-xs="start stretch"
+      >
         <h3>{{ $ctrl.country }}</h3>
       </div>
     </div>
     <div class="country__list" layout="column" layout-align="center center">
-      <div class="country"
-            layout="column" layout-align="start stretch">
+      <div class="country" layout="column" layout-align="start stretch">
         <div ng-repeat="county in $ctrl.list">
           <h3>{{ county.name }}</h3>
           <div>
             <span ng-repeat="place in county.parts">
-              <a ui-sref="main.map({c: place.coordinates})">{{ place.name || place }}</a><span ng-hide="$last">&nbsp;·</span>
+              <a ui-sref="main.map({c: place.coordinates})"
+                >{{ place.name || place }}</a
+              ><span ng-hide="$last">&nbsp;·</span>
             </span>
           </div>
         </div>
@@ -23,18 +33,37 @@
   </div>
 </div>
 <footer layout="column" layout-align="center center" flex>
-  <md-content class="container small" flex
-                layout="row" layout-align="center stretch"
-                layout-xs="column" layout-align-xs="start stretch">
+  <md-content
+    class="container small"
+    flex
+    layout="row"
+    layout-align="center stretch"
+    layout-xs="column"
+    layout-align-xs="start stretch"
+  >
     <div flex="75" flex-xs="100">
-      <p class="big">&copy; 2017-2019 <a href="//github.com/yarl">Paweł Marynowski</a> and <a href="//github.com/slaporte">Stephen LaPorte</a> // <a href="//hatnote.com/">hatnote.com</a></p>
-      <p>Monumental is a free software available under <a href="//github.com/hatnote/monumental/blob/master/LICENSE">BSD 3-Clause License</a>. </p>
-      <p><a href="//github.com/hatnote/monumental">source code</a> &bull; <a href="//phabricator.wikimedia.org/project/view/2696/">report issue</a></p>
+      <p class="big">
+        &copy; 2017-2019 <a href="//github.com/yarl">Paweł Marynowski</a> and
+        <a href="//github.com/slaporte">Stephen LaPorte</a> //
+        <a href="//hatnote.com/">hatnote.com</a>
+      </p>
+      <p>
+        Monumental is a free software available under
+        <a href="//github.com/hatnote/monumental-wlm/blob/master/LICENSE"
+          >BSD 3-Clause License</a
+        >.
+      </p>
+      <p>
+        <a href="//github.com/hatnote/monumental-wlm">source code</a> &bull;
+        <a href="//phabricator.wikimedia.org/project/view/2696/"
+          >report issue</a
+        >
+      </p>
     </div>
     <div class="text-right" flex>
       <p>
-        version <strong>{{ ::$ctrl.config.package.version }}</strong> &bull;
-        env <strong>{{ ::$ctrl.config.env.name }}</strong>
+        version <strong>{{ ::$ctrl.config.package.version }}</strong> &bull; env
+        <strong>{{ ::$ctrl.config.env.name }}</strong>
       </p>
     </div>
   </md-content>
