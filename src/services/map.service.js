@@ -1,14 +1,14 @@
-import L from 'leaflet';
+import L from "leaflet";
 
-import '../images/marker-green.png';
-import '../images/marker-red.png';
-import '../images/marker-shadow.png';
+import "../images/marker-green.png";
+import "../images/marker-red.png";
+import "../images/marker-shadow.png";
 
 const MapService = ($http) => {
   const service = {
     getCity,
     getMapIcon,
-    getMapInstance,
+    getMapInstance
   };
 
   return service;
@@ -17,101 +17,107 @@ const MapService = ($http) => {
 
   function getCity(name) {
     return $http({
-      method: 'GET',
-      url: '//nominatim.openstreetmap.org/search',
+      method: "GET",
+      url: "//nominatim.openstreetmap.org/search",
       params: {
-        format: 'json',
+        format: "json",
         q: name,
-        dedupe: 1,
-      },
+        dedupe: 1
+      }
     });
   }
 
   function getMapIcon(options) {
     return {
-      iconUrl: `assets/images/marker-${options && options.image ? 'green' : 'red'}.png`,
-      shadowUrl: 'assets/images/marker-shadow.png',
+      iconUrl: `assets/images/marker-${
+        options && options.image ? "green" : "red"
+      }.png`,
+      shadowUrl: "assets/images/marker-shadow.png",
       iconSize: [29, 41],
       shadowSize: [41, 41],
       iconAnchor: [15, 41],
       shadowAnchor: [12, 41],
-      popupAnchor: [0, -43],
+      popupAnchor: [0, -43]
     };
   }
 
   function getMapInstance(options) {
-    return angular.extend({
-      markersWatchOptions: {
-        doWatch: true,
-        isDeep: false,
-        individual: {
-          doWatch: false,
+    return angular.extend(
+      {
+        markersWatchOptions: {
+          doWatch: true,
           isDeep: false,
+          individual: {
+            doWatch: false,
+            isDeep: false
+          }
         },
-      },
-      center: {
-        lat: 51.686,
-        lng: 19.545,
-        zoom: 7,
-      },
-      markers: {},
-      events: {
-        markers: {
-          enable: ['click', 'mouseover', 'mouseout'],
+        center: {
+          lat: 51.686,
+          lng: 19.545,
+          zoom: 7
         },
-      },
-      layers: {
-        baselayers: {
-          wiki: {
-            name: 'Wikimedia Maps',
-            type: 'xyz',
-            url: '//maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png',
-            layerOptions: {
-              subdomains: ['a', 'b', 'c'],
-              attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-              continuousWorld: true,
-              maxNativeZoom: 18,
-              maxZoom: 21,
+        markers: {},
+        events: {
+          markers: {
+            enable: ["click", "mouseover", "mouseout"]
+          }
+        },
+        layers: {
+          baselayers: {
+            wiki: {
+              name: "Wikimedia Maps",
+              type: "xyz",
+              url: "//maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png",
+              layerOptions: {
+                subdomains: ["a", "b", "c"],
+                attribution:
+                  '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                continuousWorld: true,
+                maxNativeZoom: 18,
+                maxZoom: 21
+              }
             },
+            osm: {
+              name: "OpenStreetMap",
+              type: "xyz",
+              url: "//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+              layerOptions: {
+                subdomains: ["a", "b", "c"],
+                attribution:
+                  '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                continuousWorld: true,
+                maxNativeZoom: 19,
+                maxZoom: 21
+              }
+            }
           },
-          osm: {
-            name: 'OpenStreetMap',
-            type: 'xyz',
-            url: '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-            layerOptions: {
-              subdomains: ['a', 'b', 'c'],
-              attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-              continuousWorld: true,
-              maxNativeZoom: 19,
-              maxZoom: 21,
-            },
-          },
-        },
-        overlays: {
-          monuments: {
-            name: 'Monuments',
-            type: 'markercluster',
-            visible: true,
-            layerOptions: {
-              showCoverageOnHover: false,
-              zoomToBoundsOnClick: true,
-              maxClusterRadius: zoom => 130 - (zoom * 5),
-              animate: false,
-              iconCreateFunction: cluster => new L.DivIcon({
-                html: `<div><span>${cluster.getChildCount()}</span></div>`,
-                className: 'marker-cluster marker-cluster-small',
-                iconSize: new L.Point(40, 40),
-              }),
-            },
-          },
-        },
+          overlays: {
+            monuments: {
+              name: "Monuments",
+              type: "markercluster",
+              visible: true,
+              layerOptions: {
+                showCoverageOnHover: false,
+                zoomToBoundsOnClick: true,
+                maxClusterRadius: (zoom) => 130 - zoom * 5,
+                animate: false,
+                iconCreateFunction: (cluster) =>
+                  new L.DivIcon({
+                    html: `<div><span>${cluster.getChildCount()}</span></div>`,
+                    className: "marker-cluster marker-cluster-small",
+                    iconSize: new L.Point(40, 40)
+                  })
+              }
+            }
+          }
+        }
       },
-    }, options);
+      options
+    );
   }
 };
 
 export default () => {
-  angular
-    .module('monumental')
-    .factory('mapService', MapService);
+  angular.module("monumental").factory("mapService", MapService);
 };
