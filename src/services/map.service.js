@@ -18,7 +18,7 @@ const MapService = ($http) => {
   function getCity(name) {
     return $http({
       method: "GET",
-      url: "//nominatim.openstreetmap.org/search",
+      url: "//nominatim.toolforge.org/search",
       params: {
         format: "json",
         q: name,
