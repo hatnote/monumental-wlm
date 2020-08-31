@@ -69,7 +69,7 @@ function controller(
   vm.openImage = openImage;
   vm.queryCommonsCategory = queryCommonsCategory;
   vm.saveAll = saveAll;
-  vm.scrollTo = anchor => $anchorScroll(anchor);
+  vm.scrollTo = (anchor) => $anchorScroll(anchor);
 
   // init
 
@@ -87,7 +87,7 @@ function controller(
 
   uploader.filters.push({
     name: "imageFilter",
-    fn: item => {
+    fn: (item) => {
       const type = `|${item.type.slice(item.type.lastIndexOf("/") + 1)}|`;
       return "|jpg|png|jpeg|gif|".indexOf(type) !== -1;
     }
@@ -142,7 +142,7 @@ function controller(
 {{self|cc-by-sa-4.0}}
 ${
   vm.country
-    ? `{{subst:WLM-is-running|${vm.country.code}|{{Wiki Loves Monuments 2019|${vm.country.code}}}}}`
+    ? `{{subst:WLM-is-running|${vm.country.code}|{{Wiki Loves Monuments 2020|${vm.country.code}}}}}`
     : ""
 }
 
@@ -152,31 +152,29 @@ ${getCategory()}
 
   function getCategory() {
     if (vm.country.code === "gb") {
-      const [year, month, day] = moment()
-        .format("YYYY-MM-DD")
-        .split("-");
+      const [year, month, day] = moment().format("YYYY-MM-DD").split("-");
       const categories = [
         `[[Category:WLM-UK ${year} unfiltered ${month}-${day}]]`,
-        "[[Category:Images from Wiki Loves Monuments 2019 in the United Kingdom]]",
+        "[[Category:Images from Wiki Loves Monuments 2020 in the United Kingdom]]",
         getPropertyValue("P1459") &&
-          "[[Category:Images from Wiki Loves Monuments 2019 in Wales]]",
+          "[[Category:Images from Wiki Loves Monuments 2020 in Wales]]",
         getPropertyValue("P1460") &&
-          "[[Category:Images from Wiki Loves Monuments 2019 in Northern Ireland]]",
+          "[[Category:Images from Wiki Loves Monuments 2020 in Northern Ireland]]",
         getPropertyValue("P1216") &&
-          "[[Category:Images from Wiki Loves Monuments 2019 in England]]",
+          "[[Category:Images from Wiki Loves Monuments 2020 in England]]",
         (getPropertyValue("P709") || getPropertyValue("P718")) &&
-          "[[Category:Images from Wiki Loves Monuments 2019 in Scotland]]",
+          "[[Category:Images from Wiki Loves Monuments 2020 in Scotland]]",
         !getPropertyValue("P18") &&
           "[[Category:Potential image for Wikidata item]]"
       ];
-      return categories.filter(category => category).join("\n");
+      return categories.filter((category) => category).join("\n");
     }
 
     if (vm.category && vm.category.title) {
       return `[[${vm.category.title}]]`;
     }
     if (vm.country.code === "ie") {
-      return "[[Category:Images from Wiki Loves Monuments 2019 in Ireland – missing category]]";
+      return "[[Category:Images from Wiki Loves Monuments 2020 in Ireland – missing category]]";
     }
     if (vm.country.category) {
       return `[[Category:${vm.country.category}]]`;
@@ -209,11 +207,13 @@ ${getCategory()}
             .toISOString()
             .replace(/([-TZ:]|\.[0-9]*)/g, "")
         : "";
-      const queueIndex = `(${vm.uploader.queue.indexOf(
-        vm.uploader.queue
-          .filter(file => file.file.name === fileItem.file.name)
-          .pop()
-      ) + 1})`;
+      const queueIndex = `(${
+        vm.uploader.queue.indexOf(
+          vm.uploader.queue
+            .filter((file) => file.file.name === fileItem.file.name)
+            .pop()
+        ) + 1
+      })`;
 
       if (fileItem.metadata.DateTimeOriginal) {
         const parsed = parseEXIFTime(fileItem.metadata.DateTimeOriginal);
@@ -223,10 +223,7 @@ ${getCategory()}
         );
       }
 
-      const ext = fileItem.file.name
-        .split(".")
-        .pop()
-        .toLowerCase();
+      const ext = fileItem.file.name.split(".").pop().toLowerCase();
       fileItem.commons.fileName = `${city ? `${city} - ` : ""}${
         name.value
       } - ${time}.${ext}`;
@@ -258,7 +255,7 @@ ${getCategory()}
     fileItem.formData.push(...data);
   }
 
-  uploader.onAfterAddingFile = fileItem => {
+  uploader.onAfterAddingFile = (fileItem) => {
     fileItem.commons = {};
     vm.fileLoading += 1;
     readEXIF(fileItem);
@@ -269,25 +266,25 @@ ${getCategory()}
   };
 
   function getCategoryInfo(category) {
-    WikiService.getCategoryInfo(category).then(response => {
+    WikiService.getCategoryInfo(category).then((response) => {
       vm.category = response;
     });
   }
 
   function getCategoryMembers(category) {
-    WikiService.getCategoryMembers(category).then(data => {
-      const promises = data.map(image =>
+    WikiService.getCategoryMembers(category).then((data) => {
+      const promises = data.map((image) =>
         WikiService.getImage(image, { iiurlheight: 75 })
       );
-      $q.all(promises).then(response => {
-        vm.images = response.map(image => image.imageinfo);
+      $q.all(promises).then((response) => {
+        vm.images = response.map((image) => image.imageinfo);
       });
     });
   }
 
   function getWikipediaArticle(wiki) {
     vm.showAllArticles = false;
-    WikiService.getArticleHeader(wiki.code, wiki.title).then(data => {
+    WikiService.getArticleHeader(wiki.code, wiki.title).then((data) => {
       wiki.article = $sce.trustAsHtml(data);
       vm.article = wiki;
       $timeout(() => {
@@ -303,7 +300,7 @@ ${getCategory()}
   }
 
   function getImage(image) {
-    WikiService.getImage(image, { iiurlwidth: 640 }).then(response => {
+    WikiService.getImage(image, { iiurlwidth: 640 }).then((response) => {
       vm.image.push(response.imageinfo);
     });
   }
@@ -315,8 +312,8 @@ ${getCategory()}
     vm.interwiki = {};
 
     vm.interwiki.all = Object.keys(vm.monument.sitelinks)
-      .map(key => vm.monument.sitelinks[key])
-      .map(element => ({
+      .map((key) => vm.monument.sitelinks[key])
+      .map((element) => ({
         code: element.site.replace("wiki", ""),
         title: element.title,
         link: `//${element.site.replace("wiki", "")}.wikipedia.org/wiki/${
@@ -324,20 +321,20 @@ ${getCategory()}
         }`.replace(" ", "_")
       }))
       .filter(
-        element =>
+        (element) =>
           !element.code.includes("quote") && !element.code.includes("commons")
       );
 
     vm.interwiki.shown = langs
-      .map(lang => lang.code)
+      .map((lang) => lang.code)
       .concat(countryLanguages)
       .filter((element, index, array) => array.indexOf(element) === index)
-      .map(lang => {
-        const iw = vm.interwiki.all.find(element => element.code === lang);
+      .map((lang) => {
+        const iw = vm.interwiki.all.find((element) => element.code === lang);
         return iw || { code: lang };
       });
 
-    const article = vm.interwiki.shown.filter(iw => iw.title);
+    const article = vm.interwiki.shown.filter((iw) => iw.title);
     if (article.length) {
       getWikipediaArticle(article[0]);
     }
@@ -393,19 +390,16 @@ ${getCategory()}
     const promise = actions[index];
     return promise
       .promise(promise.value)
-      .then(response => {
+      .then((response) => {
         if (actions[index + 1]) {
           saveSingle(actions, index + 1);
         } else {
           $state.go($state.current, { id }, { reload: true });
         }
       })
-      .catch(err => {
+      .catch((err) => {
         $mdToast.show(
-          $mdToast
-            .simple()
-            .textContent(`Error: ${err}`)
-            .hideDelay(3000)
+          $mdToast.simple().textContent(`Error: ${err}`).hideDelay(3000)
         );
         if (actions[index + 1]) {
           saveSingle(actions, index + 1);
@@ -424,8 +418,8 @@ ${getCategory()}
   function recountQueue() {
     const claims = _.values(vm.monument.claims);
     vm.actions.claims = [];
-    claims.forEach(claim => {
-      claim.forEach(value => {
+    claims.forEach((claim) => {
+      claim.forEach((value) => {
         if (value.action) {
           vm.actions.claims.push(value.action);
         }
@@ -444,11 +438,11 @@ ${getCategory()}
 
     vm.loading = true;
 
-    textService.getText().then(data => {
+    textService.getText().then((data) => {
       vm.text = data;
     });
 
-    wikidata.getById(id).then(data => {
+    wikidata.getById(id).then((data) => {
       vm.monument = data;
 
       // WLM identifier
@@ -487,7 +481,7 @@ ${getCategory()}
             icon
           }
         };
-        leafletData.getMap().then(map => {
+        leafletData.getMap().then((map) => {
           map.scrollWheelZoom.disable();
           map.once("focus", () => {
             map.scrollWheelZoom.enable();
@@ -561,7 +555,7 @@ export default () => {
     }))
     .directive("ngThumb", [
       "$window",
-      function($window) {
+      function ($window) {
         const helper = {
           support: !!($window.FileReader && $window.CanvasRenderingContext2D),
           isFile(item) {
