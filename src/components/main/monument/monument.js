@@ -142,7 +142,7 @@ function controller(
 {{self|cc-by-sa-4.0}}
 ${
   vm.country
-    ? `{{subst:WLM-is-running|${vm.country.code}|{{Wiki Loves Monuments 2020|${vm.country.code}}}}}`
+    ? `{{subst:WLM-is-running|${vm.country.code}|{{Wiki Loves Monuments 2021|${vm.country.code}}}}}`
     : ""
 }
 
@@ -174,7 +174,7 @@ ${getCategory()}
       return `[[${vm.category.title}]]`;
     }
     if (vm.country.code === "ie") {
-      return "[[Category:Images from Wiki Loves Monuments 2020 in Ireland – missing category]]";
+      return "[[Category:Images from Wiki Loves Monuments 2021 in Ireland – missing category]]";
     }
     if (vm.country.category) {
       return `[[Category:${vm.country.category}]]`;
