@@ -142,7 +142,7 @@ function controller(
 {{self|cc-by-sa-4.0}}
 ${
   vm.country
-    ? `{{subst:WLM-is-running|${vm.country.code}|{{Wiki Loves Monuments 2022|${vm.country.code}}}}}`
+    ? `{{subst:WLM-is-running|${vm.country.code}|{{Wiki Loves Monuments 2023|${vm.country.code}}}}}`
     : ""
 }
 
@@ -155,15 +155,15 @@ ${getCategory()}
       const [year, month, day] = moment().format("YYYY-MM-DD").split("-");
       const categories = [
         `[[Category:WLM-UK ${year} unfiltered ${month}-${day}]]`,
-        "[[Category:Images from Wiki Loves Monuments 2022 in the United Kingdom]]",
+        "[[Category:Images from Wiki Loves Monuments 2023 in the United Kingdom]]",
         getPropertyValue("P1459") &&
-          "[[Category:Images from Wiki Loves Monuments 2022 in Wales]]",
+          "[[Category:Images from Wiki Loves Monuments 2023 in Wales]]",
         getPropertyValue("P1460") &&
-          "[[Category:Images from Wiki Loves Monuments 2022 in Northern Ireland]]",
+          "[[Category:Images from Wiki Loves Monuments 2023 in Northern Ireland]]",
         getPropertyValue("P1216") &&
-          "[[Category:Images from Wiki Loves Monuments 2022 in England]]",
+          "[[Category:Images from Wiki Loves Monuments 2023 in England]]",
         (getPropertyValue("P709") || getPropertyValue("P718")) &&
-          "[[Category:Images from Wiki Loves Monuments 2022 in Scotland]]",
+          "[[Category:Images from Wiki Loves Monuments 2023 in Scotland]]",
         !getPropertyValue("P18") &&
           "[[Category:Potential image for Wikidata item]]"
       ];
@@ -174,7 +174,7 @@ ${getCategory()}
       return `[[${vm.category.title}]]`;
     }
     if (vm.country.code === "ie") {
-      return "[[Category:Images from Wiki Loves Monuments 2022 in Ireland – missing category]]";
+      return "[[Category:Images from Wiki Loves Monuments 2023 in Ireland – missing category]]";
     }
     if (vm.country.category) {
       return `[[Category:${vm.country.category}]]`;
