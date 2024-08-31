@@ -46,7 +46,7 @@ function controller(
 
   vm.actions = {
     claims: [],
-    other: []
+    other: [],
   };
   vm.busy = false;
   vm.country = null;
@@ -79,7 +79,7 @@ function controller(
 
   vm.uploader = new FileUploader({
     url: `${$window.__env.baseUrl}/commons`,
-    withCredentials: true
+    withCredentials: true,
   });
   const uploader = vm.uploader;
 
@@ -90,7 +90,7 @@ function controller(
     fn: (item) => {
       const type = `|${item.type.slice(item.type.lastIndexOf("/") + 1)}|`;
       return "|jpg|png|jpeg|gif|".indexOf(type) !== -1;
-    }
+    },
   });
 
   // CALLBACKS
@@ -101,7 +101,7 @@ function controller(
     const str = time.split(" ");
     return {
       date: str[0].replace(/:/g, "-"),
-      time: str.length === 2 ? str[1] : undefined
+      time: str.length === 2 ? str[1] : undefined,
     };
   }
 
@@ -142,7 +142,7 @@ function controller(
 {{self|cc-by-sa-4.0}}
 ${
   vm.country
-    ? `{{subst:WLM-is-running|${vm.country.code}|{{Wiki Loves Monuments 2023|${vm.country.code}}}}}`
+    ? `{{subst:WLM-is-running|${vm.country.code}|{{Wiki Loves Monuments 2024|${vm.country.code}}}}}`
     : ""
 }
 
@@ -155,17 +155,17 @@ ${getCategory()}
       const [year, month, day] = moment().format("YYYY-MM-DD").split("-");
       const categories = [
         `[[Category:WLM-UK ${year} unfiltered ${month}-${day}]]`,
-        "[[Category:Images from Wiki Loves Monuments 2023 in the United Kingdom]]",
+        "[[Category:Images from Wiki Loves Monuments 2024 in the United Kingdom]]",
         getPropertyValue("P1459") &&
-          "[[Category:Images from Wiki Loves Monuments 2023 in Wales]]",
+          "[[Category:Images from Wiki Loves Monuments 2024 in Wales]]",
         getPropertyValue("P1460") &&
-          "[[Category:Images from Wiki Loves Monuments 2023 in Northern Ireland]]",
+          "[[Category:Images from Wiki Loves Monuments 2024 in Northern Ireland]]",
         getPropertyValue("P1216") &&
-          "[[Category:Images from Wiki Loves Monuments 2023 in England]]",
+          "[[Category:Images from Wiki Loves Monuments 2024 in England]]",
         (getPropertyValue("P709") || getPropertyValue("P718")) &&
-          "[[Category:Images from Wiki Loves Monuments 2023 in Scotland]]",
+          "[[Category:Images from Wiki Loves Monuments 2024 in Scotland]]",
         !getPropertyValue("P18") &&
-          "[[Category:Potential image for Wikidata item]]"
+          "[[Category:Potential image for Wikidata item]]",
       ];
       return categories.filter((category) => category).join("\n");
     }
@@ -174,7 +174,7 @@ ${getCategory()}
       return `[[${vm.category.title}]]`;
     }
     if (vm.country.code === "ie") {
-      return "[[Category:Images from Wiki Loves Monuments 2023 in Ireland – missing category]]";
+      return "[[Category:Images from Wiki Loves Monuments 2024 in Ireland – missing category]]";
     }
     if (vm.country.category) {
       return `[[Category:${vm.country.category}]]`;
@@ -232,7 +232,7 @@ ${getCategory()}
       fileItem.formData.push(
         ...[
           { filename: fileItem.commons.fileName },
-          { text: fileItem.commons.description }
+          { text: fileItem.commons.description },
         ]
       );
 
@@ -250,7 +250,7 @@ ${getCategory()}
       { errorformat: "html" },
       { comment: `Monumental WLM ${pack.version}` },
       { watchlist: "watch" },
-      { use_auth: true }
+      { use_auth: true },
     ];
     fileItem.formData.push(...data);
   }
@@ -318,7 +318,7 @@ ${getCategory()}
         title: element.title,
         link: `//${element.site.replace("wiki", "")}.wikipedia.org/wiki/${
           element.title
-        }`.replace(" ", "_")
+        }`.replace(" ", "_"),
       }))
       .filter(
         (element) =>
@@ -350,7 +350,7 @@ ${getCategory()}
   function labelChange(lang) {
     vm.actions.other[0] = {
       promise: setLabel,
-      value: lang
+      value: lang,
     };
   }
 
@@ -369,7 +369,7 @@ ${getCategory()}
     vm.actions.other[1] = {
       type: "save",
       promise: value.id ? setClaimString : addClaimString,
-      value
+      value,
     };
   }
 
@@ -430,7 +430,7 @@ ${getCategory()}
   function init() {
     vm.config = {
       env: $window.__env,
-      package: pack
+      package: pack,
     };
 
     const queueListener = $rootScope.$on("recountQueue", () => recountQueue());
@@ -471,15 +471,15 @@ ${getCategory()}
           center: {
             lat: value.latitude,
             lng: value.longitude,
-            zoom: 16
-          }
+            zoom: 16,
+          },
         });
         vm.map.markers = {
           marker: {
             lat: value.latitude,
             lng: value.longitude,
-            icon
-          }
+            icon,
+          },
         };
         leafletData.getMap().then((map) => {
           map.scrollWheelZoom.disable();
@@ -501,7 +501,7 @@ ${getCategory()}
     imageService.openImage({
       image,
       event,
-      list: vm.images
+      list: vm.images,
     });
   }
 
@@ -513,7 +513,7 @@ ${getCategory()}
     return WikiService.setClaimString({
       id: value.id,
       property: value.mainsnak.property,
-      value: value.searchSelected.title
+      value: value.searchSelected.title,
     });
   }
 
@@ -521,7 +521,7 @@ ${getCategory()}
     return WikiService.addClaimString({
       entity: id,
       property: "P373",
-      value: value.searchSelected.title
+      value: value.searchSelected.title,
     });
   }
 }
@@ -551,7 +551,7 @@ export default () => {
           }
         );
         loadImage();
-      }
+      },
     }))
     .directive("ngThumb", [
       "$window",
@@ -564,7 +564,7 @@ export default () => {
           isImage(file) {
             const type = `|${file.type.slice(file.type.lastIndexOf("/") + 1)}|`;
             return "|jpg|png|jpeg|bmp|gif|".indexOf(type) !== -1;
-          }
+          },
         };
 
         return {
@@ -598,8 +598,8 @@ export default () => {
               canvas.attr({ width, height });
               canvas[0].getContext("2d").drawImage(this, 0, 0, width, height);
             }
-          }
+          },
         };
-      }
+      },
     ]);
 };
