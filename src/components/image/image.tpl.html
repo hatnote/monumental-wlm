@@ -6,9 +6,15 @@
             layout="row" layout-align="center center"
             ng-swipe-right="nextImage()"
             ng-swipe-left="prevImage()">
-        <md-button class="md-icon-button dialog__close" ng-click="close()">
-          <md-icon>close</md-icon>
-        </md-button>
+            <md-button class="md-icon-button dialog__close" ng-click="close()">
+              <md-icon>close</md-icon>
+            </md-button>
+            <md-button ng-if="activate_scroll && " class="md-icon-button dialog__next_img" ng-click="nextImage()">
+              <md-icon>skip_next</md-icon>
+            </md-button>
+            <md-button ng-if="activate_scroll" class="md-icon-button dialog__prev_img" ng-click="prevImage()">
+              <md-icon>skip_previous</md-icon>
+            </md-button>
         <img load-src="{{ image.thumburlbig }}">
       </div>
       <div class="dialog__image-description"
