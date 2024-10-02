@@ -497,11 +497,12 @@ ${getCategory()}
     });
   }
 
-  function openImage(image, event) {
+  function openImage(image, event,activate_scroll) {
     imageService.openImage({
       image,
       event,
       list: vm.images,
+      activate_scroll:activate_scroll,
     });
   }
 

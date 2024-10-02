@@ -25,6 +25,7 @@ const ImageService = ($mdDialog, $timeout) => {
         vm.keyDown = keyDown;
         vm.nextImage = nextImage;
         vm.prevImage = prevImage;
+        vm.activate_scroll = params.activate_scroll
 
         init();
         $timeout(() => { vm.loaded = true; }, 150);

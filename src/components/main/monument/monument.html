@@ -34,7 +34,7 @@
               layout="row"
               layout-align="center center"
               ng-repeat="image in $ctrl.image"
-              ng-click="$ctrl.openImage(image, $event)"
+              ng-click="$ctrl.openImage(image, $event,false)"
             >
               <img load-src="{{image.thumburl}}" />
             </a>
@@ -359,7 +359,7 @@
       <div class="monument__images" ng-if="$ctrl.images && $ctrl.images.length">
         <a
           ng-repeat="image in $ctrl.images"
-          ng-click="$ctrl.openImage(image, $event)"
+          ng-click="$ctrl.openImage(image, $event,$ctrl.images.length>1)"
         >
           <img class="image" ng-src="{{image.thumburl}}" />
         </a>
